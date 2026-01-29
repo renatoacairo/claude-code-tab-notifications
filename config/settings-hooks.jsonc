@@ -1,0 +1,44 @@
+// Claude Code hooks configuration for tab-aware notifications.
+// Merge these hooks into your ~/.claude/settings.json file.
+//
+// These hooks trigger:
+//   Stop            -> Show notification when Claude finishes (if you're not looking at the tab)
+//   UserPromptSubmit -> Reset the tab title to "working" state
+//   Notification     -> Show notification on permission prompts
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File \"%USERPROFILE%\\.claude\\claude-notify.ps1\" -Message \"Your turn\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File \"%USERPROFILE%\\.claude\\claude-tab-active.ps1\""
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File \"%USERPROFILE%\\.claude\\claude-notify.ps1\" -Message \"Permission needed\""
+          }
+        ]
+      }
+    ]
+  }
+}

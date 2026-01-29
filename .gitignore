@@ -1,0 +1,10 @@
+# Debug logs
+focus-debug.log
+
+# Backup files
+*.bak
+
+# Editor files
+.vscode/
+*.swp
+*~
