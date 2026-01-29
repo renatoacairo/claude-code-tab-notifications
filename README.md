@@ -111,17 +111,17 @@ The installer will:
 
 3. **Add hooks** to `~/.claude/settings.json` (see `config/settings-hooks.jsonc`)
 
-4. **Add to Windows Terminal settings** (`settings.json`):
+4. **Windows Terminal settings** (`settings.json`): ensure `suppressApplicationTitle` is **not** set to `true`:
    ```json
    {
        "profiles": {
            "defaults": {
-               "suppressApplicationTitle": true
+               "suppressApplicationTitle": false
            }
        }
    }
    ```
-   This allows the scripts to control tab titles. Without it, the shell overrides custom titles.
+   When set to `true`, Windows Terminal ignores all application title changes, which prevents the emoji tab indicators from appearing. With `false` (the default), tab titles are ephemeral - the shell may update them when idle - but they persist during Claude Code sessions, which is when they matter.
 
 5. **Add the `claude-tab` function** to your PowerShell `$PROFILE` (see `config/claude-tab-function.ps1`)
 
@@ -165,9 +165,11 @@ claude-tab MyProject --model opus
 
 ## Troubleshooting
 
-### Tab switching doesn't work
+### Tab titles / emojis don't appear
 
-- Make sure `suppressApplicationTitle: true` is set in Windows Terminal settings
+- Make sure `suppressApplicationTitle` is **not** set to `true` in Windows Terminal settings (set it to `false` or remove it entirely)
+
+### Tab switching doesn't work
 - The tab name must be set via `claude-tab` before launching Claude
 - Check `~/.claude/focus-debug.log` for UI Automation diagnostics
 

@@ -259,16 +259,16 @@ foreach ($wtPath in $wtSettingsPaths) {
             $currentValue = $wtSettings.profiles.defaults.suppressApplicationTitle
         }
 
-        if ($currentValue -eq $true) {
-            Write-Skip "suppressApplicationTitle already set in $(Split-Path -Leaf $wtPath)"
+        if ($currentValue -eq $false) {
+            Write-Skip "suppressApplicationTitle already disabled in $(Split-Path -Leaf $wtPath)"
         } else {
             if ($currentValue -eq $null) {
-                $wtSettings.profiles.defaults | Add-Member -NotePropertyName "suppressApplicationTitle" -NotePropertyValue $true
+                $wtSettings.profiles.defaults | Add-Member -NotePropertyName "suppressApplicationTitle" -NotePropertyValue $false
             } else {
-                $wtSettings.profiles.defaults.suppressApplicationTitle = $true
+                $wtSettings.profiles.defaults.suppressApplicationTitle = $false
             }
             $wtSettings | ConvertTo-Json -Depth 10 | Set-Content $wtPath -Encoding UTF8
-            Write-Done "Set suppressApplicationTitle = true in $(Split-Path -Leaf $wtPath)"
+            Write-Done "Set suppressApplicationTitle = false in $(Split-Path -Leaf $wtPath)"
         }
         $wtConfigured = $true
         break
