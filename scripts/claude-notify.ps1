@@ -44,7 +44,10 @@ if ($processId -gt 0) {
 
 # Mark this tab as waiting - visible at a glance in the tab bar
 if ($TabHint) {
-    try { [Console]::Title = "👀 $TabHint" } catch {}
+    try {
+        $eyes = [char]::ConvertFromUtf32(0x1F440)
+        [Console]::Title = "$eyes $TabHint"
+    } catch {}
 }
 
 # Load Windows Runtime assemblies
