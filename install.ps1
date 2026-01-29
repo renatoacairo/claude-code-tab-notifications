@@ -296,7 +296,8 @@ function claude-tab {
     param([Parameter(Position=0)][string]$Name)
     if ($Name) {
         $env:CLAUDE_TAB_NAME = $Name
-        $host.UI.RawUI.WindowTitle = "⚡ $Name"
+        $bolt = [char]::ConvertFromUtf32(0x26A1)
+        $host.UI.RawUI.WindowTitle = "$bolt $Name"
     }
     claude @args
 }
