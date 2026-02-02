@@ -178,6 +178,18 @@ claude-tab MyProject --model opus
 - Ensure Windows notifications are enabled for Windows Terminal in Settings > System > Notifications
 - Verify the hooks are in `~/.claude/settings.json` (run `claude-tab` and check)
 
+### Clicking the toast opens a new Terminal window
+
+This happens on Windows 11 when Windows Terminal is set as the **default terminal application**. Windows intercepts all `powershell.exe` launches and routes them through Terminal, ignoring `WindowStyle Hidden`.
+
+**Fix:** Ensure `focus-terminal.vbs` uses `conhost.exe --headless` to bypass Terminal's interception:
+
+```vbs
+shell.Run "conhost.exe --headless powershell.exe -NoProfile -WindowStyle Hidden ..."
+```
+
+If you installed before this fix, re-run `install.ps1` or manually copy the updated `scripts/focus-terminal.vbs` to `~/.claude/focus-terminal.vbs`.
+
 ### Toast appears but clicking does nothing
 
 - Verify the `claude-focus://` protocol is registered: open Run (Win+R) and type `claude-focus://test`
