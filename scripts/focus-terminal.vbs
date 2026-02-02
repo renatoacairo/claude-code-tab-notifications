@@ -6,4 +6,4 @@ If WScript.Arguments.Count > 0 Then
 Else
     protocolUrl = ""
 End If
-shell.Run "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File """ & shell.ExpandEnvironmentStrings("%USERPROFILE%") & "\.claude\focus-terminal.ps1"" -ProtocolUrl """ & protocolUrl & """", 0, False
+shell.Run "conhost.exe --headless powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File """ & shell.ExpandEnvironmentStrings("%USERPROFILE%") & "\.claude\focus-terminal.ps1"" -ProtocolUrl """ & protocolUrl & """", 0, False
