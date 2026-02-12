@@ -14,5 +14,5 @@ if ($TabHint) {
 try {
     $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
     $AppId = "Microsoft.WindowsTerminal_8wekyb3d8bbwe!App"
-    [Windows.UI.Notifications.ToastNotificationManager]::History.Clear($AppId)
+    [Windows.UI.Notifications.ToastNotificationManager]::History.Remove("claude-code", "claude-code", $AppId)
 } catch {}

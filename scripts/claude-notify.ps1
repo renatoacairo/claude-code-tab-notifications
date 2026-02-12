@@ -102,10 +102,12 @@ if ($terminalFocusedDifferentTab) {
 "@
 }
 
-# Create and show notification (clear previous ones first to avoid stacking)
+# Create and show notification (tag ensures Windows replaces any existing one)
 $xml = New-Object Windows.Data.Xml.Dom.XmlDocument
 $xml.LoadXml($template)
 $toast = New-Object Windows.UI.Notifications.ToastNotification $xml
+$toast.Tag = "claude-code"
+$toast.Group = "claude-code"
 $notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId)
 [Windows.UI.Notifications.ToastNotificationManager]::History.Clear($AppId)
 $notifier.Show($toast)
